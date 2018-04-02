@@ -1,0 +1,66 @@
+package com.example.baohuynh.mymovieapp.adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.example.baohuynh.mymovieapp.MovieAPI;
+import com.example.baohuynh.mymovieapp.R;
+import com.example.baohuynh.mymovieapp.model.Actor;
+import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
+
+/**
+ * Created by baohuynh on 29/03/2018.
+ */
+
+public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ActorHolder> {
+    private Context mContext;
+    private static ArrayList<Actor> mActors;
+
+    public ActorAdapter(Context context, ArrayList<Actor> actors) {
+        mContext = context;
+        mActors = actors;
+    }
+
+    @Override
+    public ActorAdapter.ActorHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.display_actor, parent, false);
+        return new ActorHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(ActorAdapter.ActorHolder holder, int position) {
+        holder.addData(mContext, mActors.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mActors.size();
+    }
+
+    static class ActorHolder extends RecyclerView.ViewHolder {
+        private ImageView imgActor;
+        private TextView tvName, tvCharacter;
+
+        private ActorHolder(View itemView) {
+            super(itemView);
+            imgActor = itemView.findViewById(R.id.img_actor);
+            tvName = itemView.findViewById(R.id.tv_name_actor);
+            tvCharacter = itemView.findViewById(R.id.tv_character_actor);
+        }
+
+        private void addData(Context context, Actor actor) {
+            if (actor.getImgActor().equals(MovieAPI.GET_IMAGE_PATH + "null")) {
+                Picasso.with(context).load(R.drawable.ic_empty_img).into(imgActor);
+            } else {
+                Picasso.with(context).load(actor.getImgActor()).into(imgActor);
+            }
+            tvName.setText(actor.getNameActor());
+            tvCharacter.setText(actor.getNameCharacter());
+        }
+    }
+}

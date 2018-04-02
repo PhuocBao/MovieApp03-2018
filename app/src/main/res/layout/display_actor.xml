@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_5"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/img_actor"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_150"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/content_discription"
+        />
+    <TextView
+        android:id="@+id/tv_name_actor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textColor="#3032a1"
+        android:textSize="@dimen/sp_15"
+        />
+    <TextView
+        android:id="@+id/tv_character_actor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp_12"
+        />
+</LinearLayout>
