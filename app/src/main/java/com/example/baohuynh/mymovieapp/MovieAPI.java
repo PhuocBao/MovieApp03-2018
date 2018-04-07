@@ -9,12 +9,14 @@ public final class MovieAPI {
     public static final String YOUTUBE_API = "AIzaSyBXl61UD99Ls-3o4ImdL9TfQtnXObnj51U";
     private static final String MOVIE_KEY = "8ec3fbf1c1b06d940e29c592421917ae";
     private static final String SITE = "https://api.themoviedb.org/3/movie/";
+    private static final String SITE_GENRES = "https://api.themoviedb.org/3/genre/";
     private static final String LANGUAGE = "&language=en-US";
     private static final String PAGE = "&page=";
     private static final String POPULAR = "popular?api_key=";
     private static final String NOW_PLAYING = "now_playing?api_key=";
     private static final String UPCOMING = "upcoming?api_key=";
     private static final String TOP_RATE = "top_rated?api_key=";
+    private static final String SOMETHING_IN_GENRES = "&include_adult=false&sort_by=created_at.asc";
 
     public MovieAPI() {
     }
@@ -41,5 +43,20 @@ public final class MovieAPI {
 
     public static String getTrailerMovie(int idMovie) {
         return SITE + idMovie + "/videos" + "?api_key=" + MOVIE_KEY;
+    }
+
+    public static String getSimilarMovie(int idMovie, int page) {
+        return SITE + idMovie + "/similar" + "?api_key=" + MOVIE_KEY + LANGUAGE + PAGE + page;
+    }
+
+    public static String getMovieGenres(int idGenres, int page) {
+        return SITE_GENRES
+                + idGenres
+                + "/movies?api_key="
+                + MOVIE_KEY
+                + LANGUAGE
+                + SOMETHING_IN_GENRES
+                + PAGE
+                + page;
     }
 }

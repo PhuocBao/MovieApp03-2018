@@ -3,7 +3,6 @@ package com.example.baohuynh.mymovieapp.adapter;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int visibleThreshold = 5;
                 int totalItemCount = manager.getItemCount();
-                int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
+                int lastVisibleItem = manager.findLastVisibleItemPosition();
                 if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
                     // End has been reached
                     // Do something
@@ -96,6 +95,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void setLoading(boolean loading) {
         isLoading =  loading;
     }
+
 
     private static class MovieHolder extends RecyclerView.ViewHolder {
         private ImageView imgMovie;

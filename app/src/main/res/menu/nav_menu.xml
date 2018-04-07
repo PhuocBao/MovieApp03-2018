@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menu_genres"
+        android:title="@string/genres">
+        <menu>
+            <item android:id="@+id/menu_action"
+                android:title="@string/action"
+                android:icon="@drawable/ic_action"/>
+            <item android:id="@+id/menu_adventure"
+                android:title="@string/adventure"
+                android:icon="@drawable/ic_adventure"/>
+            <item android:id="@+id/menu_animation"
+                android:title="@string/animation"
+                android:icon="@drawable/ic_animation"/>
+            <item android:id="@+id/menu_comedy"
+                android:title="@string/comedy"
+                android:icon="@drawable/ic_comedy"/>
+            <item android:id="@+id/menu_crime"
+                android:title="@string/crime"
+                android:icon="@drawable/ic_crime"/>
+            <item android:id="@+id/menu_drama"
+                android:title="@string/drama"
+                android:icon="@drawable/ic_drama"/>
+        </menu>
+    </item>
+</menu>

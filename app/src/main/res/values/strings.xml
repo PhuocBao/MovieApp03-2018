@@ -5,7 +5,6 @@
     <string name="now_playing">Now Playing</string>
     <string name="upcoming">Upcoming</string>
     <string name="top_rate">Top Rate</string>
-    <string name="genres">Genres</string>
     <string name="content_discription">content discription</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
@@ -13,4 +12,13 @@
     <string name="watch_trailer">Watch Trailer</string>
     <string name="overview">Overview</string>
     <string name="actor">Actor</string>
+    <string name="genres">Genres</string>
+    <string name="action">Action</string>
+    <string name="adventure">Adventure</string>
+    <string name="animation">Animation</string>
+    <string name="comedy">Comedy</string>
+    <string name="crime">Crime</string>
+    <string name="drama">Drama</string>
+    <string name="intro">Developed by Phước Bảo</string>
+    <string name="my_email">phuocbaohuynh@gmail.com</string>
 </resources>

@@ -20,14 +20,14 @@ import org.json.JSONObject;
  */
 
 public class GetMovieJson extends AsyncTask<String, Void, String> {
-    private static final String ID = "id";
-    private static final String RESULT = "results";
-    private static final String TITLE = "title";
-    private static final String POSTER = "poster_path";
-    private static final String BACKDROP = "backdrop_path";
-    private static final String VOTE_AVERAGE = "vote_average";
-    private static final String OVERVIEW = "overview";
-    private static final String RELEASE_DAY = "release_date";
+    public static final String ID = "id";
+    public static final String RESULT = "results";
+    public static final String TITLE = "title";
+    public static final String POSTER = "poster_path";
+    public static final String BACKDROP = "backdrop_path";
+    public static final String VOTE_AVERAGE = "vote_average";
+    public static final String OVERVIEW = "overview";
+    public static final String RELEASE_DAY = "release_date";
     private ArrayList<Movie> mMovies;
     private CallbackMovieJson mCallbackMovieJson;
 

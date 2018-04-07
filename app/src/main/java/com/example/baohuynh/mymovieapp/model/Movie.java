@@ -23,7 +23,7 @@ public class Movie implements Parcelable {
         this.mVoteAverage = voteAverage;
     }
 
-    protected Movie(Parcel in) {
+    private Movie(Parcel in) {
         movieID = in.readInt();
         imgMovie = in.readString();
         txtMovieName = in.readString();

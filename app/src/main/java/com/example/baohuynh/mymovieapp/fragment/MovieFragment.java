@@ -24,14 +24,15 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment implements CallbackMovieJson, CallBackOnClickMovieItem,
-        OnLoadMoreListener {
+public class MovieFragment extends Fragment
+        implements CallbackMovieJson, CallBackOnClickMovieItem, OnLoadMoreListener {
     public static final String MOVIE_LIST = "movie_list";
     public static final String POSITION = "position";
-    private static final int SPAN_COUNT = 3;
+    public static final int SPAN_COUNT = 3;
     private RecyclerView mRecyclerView;
     private int mPage = 1;
     private ArrayList<Movie> mMovies = new ArrayList<>();
+    private ArrayList<Movie> mTempArr;
     private MovieAdapter movieAdapter;
 
     public MovieFragment() {
@@ -43,21 +44,26 @@ public class MovieFragment extends Fragment implements CallbackMovieJson, CallBa
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_main);
-        int defaultPage = 1;
-        updatePage(defaultPage);
+        updatePage(mPage);
         return view;
     }
 
     @Override
     public void CallbackSuccess(ArrayList<Movie> movies) {
-        movieAdapter = new MovieAdapter(getContext(), movies, mRecyclerView);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        mRecyclerView.setAdapter(movieAdapter);
-        mRecyclerView.setHasFixedSize(true);
-        movieAdapter.setClickMovieItem(this);
-        movieAdapter.setLoadMoreListener(this);
-        movieAdapter.setLoading(false);
+        if (mTempArr == null) {
+            mTempArr = movies;
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
+            mRecyclerView.setLayoutManager(gridLayoutManager);
+            movieAdapter = new MovieAdapter(getContext(), mTempArr, mRecyclerView);
+            mRecyclerView.setAdapter(movieAdapter);
+            movieAdapter.setLoadMoreListener(this);
+            movieAdapter.setClickMovieItem(this);
+        } else {
+            //if arraylist not null, insert item into progress loading position = size - 1
+            //the list will not reload and back to top of view
+            movieAdapter.notifyItemInserted(mTempArr.size() - 1);
+            movieAdapter.setLoading(false);
+        }
     }
 
     @Override
@@ -73,21 +79,21 @@ public class MovieFragment extends Fragment implements CallbackMovieJson, CallBa
         startActivity(iMovieData);
     }
 
-    public void updatePage(int mPage) {
+    public void updatePage(int page) {
         int position = getArguments().getInt(ViewPagerAdapter.FRAGMENT_KEY);
         GetMovieJson getMovie = new GetMovieJson(mMovies, this);
         switch (position) {
             case ViewPagerAdapter.TabItem.POPULAR:
-                getMovie.execute(MovieAPI.getPopular(mPage));
+                getMovie.execute(MovieAPI.getPopular(page));
                 break;
             case ViewPagerAdapter.TabItem.NOW_PLAYING:
-                getMovie.execute(MovieAPI.getNowPlaying(mPage));
+                getMovie.execute(MovieAPI.getNowPlaying(page));
                 break;
             case ViewPagerAdapter.TabItem.UPCOMING:
-                getMovie.execute(MovieAPI.getUpcoming(mPage));
+                getMovie.execute(MovieAPI.getUpcoming(page));
                 break;
             case ViewPagerAdapter.TabItem.TOP_RATE:
-                getMovie.execute(MovieAPI.getTopRate(mPage));
+                getMovie.execute(MovieAPI.getTopRate(page));
                 break;
         }
     }
@@ -100,7 +106,11 @@ public class MovieFragment extends Fragment implements CallbackMovieJson, CallBa
         mRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                movieAdapter.notifyItemInserted(mMovies.size() - 1);
+                //when progress is loading, remove progress position when it loaded
+                //if not, the progress always in loading status
+                int positionItemProgress = mTempArr.size() - 1;
+                mTempArr.remove(positionItemProgress);
+                movieAdapter.notifyItemRemoved(positionItemProgress);
             }
         });
         mPage++;
