@@ -7,7 +7,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import com.example.baohuynh.mymovieapp.MovieAPI;
+import android.widget.Toast;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
@@ -67,7 +68,7 @@ public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadM
 
     @Override
     public void onGetGenresFail(Throwable e) {
-
+        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

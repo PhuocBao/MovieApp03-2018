@@ -1,7 +1,7 @@
 package com.example.baohuynh.mymovieapp.handler;
 
 import android.os.AsyncTask;
-import com.example.baohuynh.mymovieapp.MovieAPI;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.model.Actor;
 import java.io.BufferedReader;
 import java.io.IOException;

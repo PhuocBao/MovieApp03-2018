@@ -3,17 +3,23 @@ package com.example.baohuynh.mymovieapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.example.baohuynh.mymovieapp.MovieAPI;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.activity.MovieDetail;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
 import com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter;
+import com.example.baohuynh.mymovieapp.data.FavoriteTab;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.handler.CallBackOnClickMovieItem;
 import com.example.baohuynh.mymovieapp.handler.CallbackMovieJson;
 import com.example.baohuynh.mymovieapp.handler.GetMovieJson;
@@ -25,7 +31,8 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MovieFragment extends Fragment
-        implements CallbackMovieJson, CallBackOnClickMovieItem, OnLoadMoreListener {
+        implements CallbackMovieJson, CallBackOnClickMovieItem, OnLoadMoreListener,
+        SearchView.OnQueryTextListener {
     public static final String MOVIE_LIST = "movie_list";
     public static final String POSITION = "position";
     public static final int SPAN_COUNT = 3;
@@ -45,6 +52,8 @@ public class MovieFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_main);
         updatePage(mPage);
+        //can't init menu if you're not call this line
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -68,7 +77,16 @@ public class MovieFragment extends Fragment
 
     @Override
     public void CallbackFail(Throwable e) {
-        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -95,6 +113,10 @@ public class MovieFragment extends Fragment
             case ViewPagerAdapter.TabItem.TOP_RATE:
                 getMovie.execute(MovieAPI.getTopRate(page));
                 break;
+            case ViewPagerAdapter.TabItem.FAVORITE:
+                FavoriteTab favoriteTab = new FavoriteTab(getContext(), mTempArr, mRecyclerView);
+                favoriteTab.setListFav();
+                break;
         }
     }
 
@@ -116,5 +138,23 @@ public class MovieFragment extends Fragment
         mPage++;
         updatePage(mPage);
         movieAdapter.setLoading(true);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        ArrayList<Movie> filterList = new ArrayList<>();
+        for (Movie m : mMovies) {
+            String movieName = m.getTxtMovieName().toLowerCase();
+            if (movieName.contains(newText.toLowerCase())) {
+                filterList.add(m);
+            }
+        }
+        movieAdapter.setFilter(filterList);
+        return true;
     }
 }

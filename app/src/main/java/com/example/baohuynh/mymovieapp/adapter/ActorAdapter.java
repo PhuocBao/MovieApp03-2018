@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.baohuynh.mymovieapp.MovieAPI;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.model.Actor;
 import com.squareup.picasso.Picasso;

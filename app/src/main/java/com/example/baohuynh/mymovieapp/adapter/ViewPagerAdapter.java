@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
 import java.lang.annotation.Retention;
 
+import static com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter.TabItem.FAVORITE;
 import static com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter.TabItem.NOW_PLAYING;
 import static com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter.TabItem.POPULAR;
 import static com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter.TabItem.TOP_RATE;
@@ -22,7 +22,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private static final int TAB_ITEM = 4;
+    private static final int TAB_ITEM = 5;
     private Context mContext;
     public static final String FRAGMENT_KEY = "fragment_key";
 
@@ -52,9 +52,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 bundle.putInt(FRAGMENT_KEY, TOP_RATE);
                 movieFragment.setArguments(bundle);
                 return movieFragment;
-            default:
-                return null;
+            case FAVORITE:
+                bundle.putInt(FRAGMENT_KEY, FAVORITE);
+                movieFragment.setArguments(bundle);
+                return movieFragment;
         }
+        return movieFragment;
     }
 
     @Override
@@ -73,17 +76,20 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return mContext.getResources().getString(R.string.upcoming);
             case TOP_RATE:
                 return mContext.getResources().getString(R.string.top_rate);
+            case FAVORITE:
+                return mContext.getResources().getString(R.string.favorite);
             default:
                 return null;
         }
     }
 
     @Retention(SOURCE)
-    @IntDef({POPULAR, NOW_PLAYING, UPCOMING, TOP_RATE})
+    @IntDef({ POPULAR, NOW_PLAYING, UPCOMING, TOP_RATE, FAVORITE })
     public @interface TabItem {
         int POPULAR = 0;
         int NOW_PLAYING = 1;
         int UPCOMING = 2;
         int TOP_RATE = 3;
+        int FAVORITE = 4;
     }
 }

@@ -19,6 +19,9 @@
     <string name="comedy">Comedy</string>
     <string name="crime">Crime</string>
     <string name="drama">Drama</string>
-    <string name="intro">Developed by Phước Bảo</string>
+    <string name="intro">Developed by Phuoc Bao</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
     <string name="my_email">phuocbaohuynh@gmail.com</string>
+    <string name="error">Get data error. Please check your connection</string>
 </resources>

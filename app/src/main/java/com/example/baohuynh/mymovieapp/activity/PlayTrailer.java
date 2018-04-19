@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-import com.example.baohuynh.mymovieapp.MovieAPI;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
@@ -73,7 +73,7 @@ public class PlayTrailer extends YouTubeBaseActivity
 
     @Override
     public void getTrailerFail(Throwable e) {
-        //TODO: do it later
+        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class PlayTrailer extends YouTubeBaseActivity
 
     @Override
     public void onGetSimilarMovieFail(Throwable e) {
-        //TODO: DO LATER
+        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

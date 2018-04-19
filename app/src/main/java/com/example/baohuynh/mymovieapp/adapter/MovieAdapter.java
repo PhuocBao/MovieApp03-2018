@@ -42,7 +42,6 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 int lastVisibleItem = manager.findLastVisibleItemPosition();
                 if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
                     // End has been reached
-                    // Do something
                     mLoadMoreListener.onLoadMore();
                 }
             }
@@ -96,13 +95,18 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         isLoading =  loading;
     }
 
+    public void setFilter(ArrayList<Movie> movieArrayList) {
+        mMovies = new ArrayList<>();
+        mMovies.addAll(movieArrayList);
+        notifyDataSetChanged();
+    }
 
     private static class MovieHolder extends RecyclerView.ViewHolder {
         private ImageView imgMovie;
         private TextView txtMovieName;
         private CallBackOnClickMovieItem mClickMovieItem;
 
-        private MovieHolder(final View itemView, final CallBackOnClickMovieItem item) {
+        private MovieHolder(View itemView, CallBackOnClickMovieItem item) {
             super(itemView);
             imgMovie = itemView.findViewById(R.id.img_movie);
             txtMovieName = itemView.findViewById(R.id.tv_movie_name);
