@@ -53,7 +53,7 @@ public class GetMovieJson extends AsyncTask<String, Void, String> {
         } catch (MalformedURLException e) {
             mCallbackMovieJson.CallbackFail(e);
         } catch (IOException e) {
-            mCallbackMovieJson.CallbackFail(e);
+            //mCallbackMovieJson.CallbackFail(e);
         }
         return result;
     }
