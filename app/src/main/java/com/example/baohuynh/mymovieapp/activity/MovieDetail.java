@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.baohuynh.mymovieapp.adapter.ActorAdapter;
 import com.example.baohuynh.mymovieapp.data.DatabaseHelper;
 import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
+import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
 import com.example.baohuynh.mymovieapp.handler.CallbackActor;
 import com.example.baohuynh.mymovieapp.handler.GetMovieActorJson;
 import com.example.baohuynh.mymovieapp.model.Actor;
@@ -27,8 +29,12 @@ import com.example.baohuynh.mymovieapp.model.Movie;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
-public class MovieDetail extends AppCompatActivity implements CallbackActor, View.OnClickListener {
+public class MovieDetail extends AppCompatActivity implements CallbackActor, View.OnClickListener,
+        CallBackOnClickItem {
     public static final String MOVIE_ID = "movie_id";
+    public static final String NAME = "name";
+    public static final String ACTOR_ID = "actor_id";
+    public static final String ACTOR_IMG = "actor_img";
     private int mPosition;
     private boolean selectedItem;
     private ImageView mImageDetail;
@@ -104,7 +110,7 @@ public class MovieDetail extends AppCompatActivity implements CallbackActor, Vie
     @Override
     public void onGetSuccess(ArrayList<Actor> actors) {
         RecyclerView mRecyclerActor = findViewById(R.id.recycler_actor);
-        mRecyclerActor.setAdapter(new ActorAdapter(this, actors));
+        mRecyclerActor.setAdapter(new ActorAdapter(this, actors, this));
         mRecyclerActor.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerActor.setHasFixedSize(true);
@@ -156,5 +162,16 @@ public class MovieDetail extends AppCompatActivity implements CallbackActor, Vie
 
     private void setSelectedItem(boolean isSelected) {
         selectedItem = isSelected;
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent iActorMovieList = new Intent(this, ActorMovieList.class);
+        iActorMovieList.putExtra(MovieFragment.POSITION, position);
+        iActorMovieList.putExtra(ACTOR_ID, mActors.get(position).getActorID());
+        iActorMovieList.putExtra(NAME, mActors.get(position).getNameActor());
+        iActorMovieList.putExtra(ACTOR_IMG, mActors.get(position).getImgActor());
+        Log.d("id", "onClick: "+mActors.get(position).getActorID());
+        startActivity(iActorMovieList);
     }
 }

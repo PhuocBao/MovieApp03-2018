@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
-import com.example.baohuynh.mymovieapp.handler.CallBackOnClickMovieItem;
+import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
 import com.example.baohuynh.mymovieapp.handler.CallbackGetSimilarMovie;
 import com.example.baohuynh.mymovieapp.handler.CallbackMovieTrailer;
 import com.example.baohuynh.mymovieapp.handler.GetMovieTrailerJson;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class PlayTrailer extends YouTubeBaseActivity
         implements CallbackMovieTrailer, CallbackGetSimilarMovie, OnLoadMoreListener,
-        CallBackOnClickMovieItem {
+        CallBackOnClickItem {
     private ArrayList<Trailer> mTrailers = new ArrayList<>();
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private ArrayList<Movie> mTempList;

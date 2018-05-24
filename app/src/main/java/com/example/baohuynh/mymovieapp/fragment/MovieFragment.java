@@ -20,7 +20,7 @@ import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
 import com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter;
 import com.example.baohuynh.mymovieapp.data.FavoriteTab;
 import com.example.baohuynh.mymovieapp.data.MovieAPI;
-import com.example.baohuynh.mymovieapp.handler.CallBackOnClickMovieItem;
+import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
 import com.example.baohuynh.mymovieapp.handler.CallbackMovieJson;
 import com.example.baohuynh.mymovieapp.handler.GetMovieJson;
 import com.example.baohuynh.mymovieapp.handler.OnLoadMoreListener;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MovieFragment extends Fragment
-        implements CallbackMovieJson, CallBackOnClickMovieItem, OnLoadMoreListener,
+        implements CallbackMovieJson, CallBackOnClickItem, OnLoadMoreListener,
         SearchView.OnQueryTextListener {
     public static final String MOVIE_LIST = "movie_list";
     public static final String POSITION = "position";

@@ -20,9 +20,9 @@ import org.json.JSONObject;
  */
 
 public class GetMovieActorJson extends AsyncTask<String, Void, String> {
+    public static final String CAST = "cast";
+    public static final String ACTOR_NAME = "name";
     private static final String ID_CAST = "id";
-    private static final String CAST = "cast";
-    private static final String ACTOR_NAME = "name";
     private static final String CHARACTER = "character";
     private static final String IMG_CAST = "profile_path";
     private ArrayList<Actor> mActors;

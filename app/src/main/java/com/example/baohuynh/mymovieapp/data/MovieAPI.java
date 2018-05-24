@@ -10,6 +10,7 @@ public final class MovieAPI {
     private static final String MOVIE_KEY = "8ec3fbf1c1b06d940e29c592421917ae";
     private static final String SITE = "https://api.themoviedb.org/3/movie/";
     private static final String SITE_GENRES = "https://api.themoviedb.org/3/genre/";
+    private static final String SITE_ACTOR = "https://api.themoviedb.org/3/person/";
     private static final String LANGUAGE = "&language=en-US";
     private static final String PAGE = "&page=";
     private static final String POPULAR = "popular?api_key=";
@@ -58,5 +59,19 @@ public final class MovieAPI {
                 + SOMETHING_IN_GENRES
                 + PAGE
                 + page;
+    }
+
+    public static String getActor(int idActor, int page) {
+        return SITE_ACTOR
+                + idActor
+                + "/movie_credits?api_key="
+                + MOVIE_KEY
+                + LANGUAGE
+                + PAGE
+                + page;
+    }
+
+    public static String getActorDetail(int idActor) {
+        return SITE_ACTOR + idActor + "?api_key=" + MOVIE_KEY + LANGUAGE;
     }
 }

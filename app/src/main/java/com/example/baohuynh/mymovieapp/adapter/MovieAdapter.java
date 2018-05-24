@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.baohuynh.mymovieapp.R;
-import com.example.baohuynh.mymovieapp.handler.CallBackOnClickMovieItem;
+import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
 import com.example.baohuynh.mymovieapp.handler.OnLoadMoreListener;
 import com.example.baohuynh.mymovieapp.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -27,7 +27,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private boolean isLoading = false;
     private Context mContext;
     private ArrayList<Movie> mMovies;
-    private CallBackOnClickMovieItem mClickMovieItem;
+    private CallBackOnClickItem mClickMovieItem;
     private OnLoadMoreListener mLoadMoreListener;
 
     public MovieAdapter(Context context, ArrayList<Movie> movies, RecyclerView recyclerView) {
@@ -83,7 +83,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mMovies.get(position) == null ? VIEW_TYPE_LOAD : VIEW_TYPE_ITEM;
     }
 
-    public void setClickMovieItem(CallBackOnClickMovieItem clickMovieItem) {
+    public void setClickMovieItem(CallBackOnClickItem clickMovieItem) {
         mClickMovieItem = clickMovieItem;
     }
 
@@ -92,7 +92,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public void setLoading(boolean loading) {
-        isLoading =  loading;
+        isLoading = loading;
     }
 
     public void setFilter(ArrayList<Movie> movieArrayList) {
@@ -104,9 +104,9 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static class MovieHolder extends RecyclerView.ViewHolder {
         private ImageView imgMovie;
         private TextView txtMovieName;
-        private CallBackOnClickMovieItem mClickMovieItem;
+        private CallBackOnClickItem mClickMovieItem;
 
-        private MovieHolder(View itemView, CallBackOnClickMovieItem item) {
+        private MovieHolder(View itemView, CallBackOnClickItem item) {
             super(itemView);
             imgMovie = itemView.findViewById(R.id.img_movie);
             txtMovieName = itemView.findViewById(R.id.tv_movie_name);

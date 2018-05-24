@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
+import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
-import com.example.baohuynh.mymovieapp.handler.CallBackOnClickMovieItem;
+import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
 import com.example.baohuynh.mymovieapp.handler.CallbackGenres;
 import com.example.baohuynh.mymovieapp.handler.GetGenresJson;
 import com.example.baohuynh.mymovieapp.handler.OnLoadMoreListener;
@@ -23,7 +23,7 @@ import static com.example.baohuynh.mymovieapp.fragment.MovieFragment.MOVIE_LIST;
 import static com.example.baohuynh.mymovieapp.fragment.MovieFragment.POSITION;
 
 public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadMoreListener,
-        CallBackOnClickMovieItem {
+        CallBackOnClickItem {
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;

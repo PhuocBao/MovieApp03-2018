@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
+import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.activity.MovieDetail;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
-import com.example.baohuynh.mymovieapp.handler.CallBackOnClickMovieItem;
+import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
 import com.example.baohuynh.mymovieapp.handler.OnLoadMoreListener;
 import com.example.baohuynh.mymovieapp.model.Movie;
 import java.util.ArrayList;
 
-public class FavoriteTab implements OnLoadMoreListener, CallBackOnClickMovieItem {
+public class FavoriteTab implements OnLoadMoreListener, CallBackOnClickItem {
     private ArrayList<Movie> mMovies;
     private RecyclerView mRecyclerView;
     private Context mContext;
@@ -37,7 +39,7 @@ public class FavoriteTab implements OnLoadMoreListener, CallBackOnClickMovieItem
 
     @Override
     public void onLoadMore() {
-        //TODO: do nothing
+        Toast.makeText(mContext, R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
