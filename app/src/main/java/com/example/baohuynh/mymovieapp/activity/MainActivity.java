@@ -1,6 +1,7 @@
 package com.example.baohuynh.mymovieapp.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter;
 import java.lang.annotation.Retention;
+import java.util.Objects;
 
 import static com.example.baohuynh.mymovieapp.activity.MainActivity.Nav_Item.ACTION;
 import static com.example.baohuynh.mymovieapp.activity.MainActivity.Nav_Item.ADVENTURE;
@@ -47,7 +49,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Home");
+        }
         mDrawerLayout = findViewById(R.id.drawer_main);
         ActionBarDrawerToggle mDrawerToggle =
                 new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open,
@@ -103,7 +108,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Retention(SOURCE)
-    @IntDef({ACTION, ADVENTURE, ANIMATION, COMEDY, CRIME, DRAMA})
+    @IntDef({ ACTION, ADVENTURE, ANIMATION, COMEDY, CRIME, DRAMA })
     public @interface Nav_Item {
         int ACTION = 0;
         int ADVENTURE = 1;

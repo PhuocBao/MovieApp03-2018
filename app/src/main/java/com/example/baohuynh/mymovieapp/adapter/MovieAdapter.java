@@ -96,7 +96,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public void setFilter(ArrayList<Movie> movieArrayList) {
-        mMovies = new ArrayList<>();
+        mMovies.clear();
         mMovies.addAll(movieArrayList);
         notifyDataSetChanged();
     }

@@ -171,7 +171,6 @@ public class MovieDetail extends AppCompatActivity implements CallbackActor, Vie
         iActorMovieList.putExtra(ACTOR_ID, mActors.get(position).getActorID());
         iActorMovieList.putExtra(NAME, mActors.get(position).getNameActor());
         iActorMovieList.putExtra(ACTOR_IMG, mActors.get(position).getImgActor());
-        Log.d("id", "onClick: "+mActors.get(position).getActorID());
         startActivity(iActorMovieList);
     }
 }

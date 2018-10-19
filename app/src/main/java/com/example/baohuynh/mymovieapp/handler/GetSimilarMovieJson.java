@@ -30,7 +30,7 @@ public class GetSimilarMovieJson extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         try {
             URL url = new URL(strings[0]);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -39,7 +39,7 @@ public class GetSimilarMovieJson extends AsyncTask<String, Void, String> {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String read = "";
             while ((read = bufferedReader.readLine()) != null) {
-                result += read;
+                result.append(read);
             }
             inputStream.close();
             httpURLConnection.disconnect();
@@ -48,7 +48,7 @@ public class GetSimilarMovieJson extends AsyncTask<String, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return result.toString();
     }
 
     @Override
