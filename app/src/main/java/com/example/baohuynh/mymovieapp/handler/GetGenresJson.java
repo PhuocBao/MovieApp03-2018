@@ -20,31 +20,31 @@ import org.json.JSONObject;
 
 public class GetGenresJson extends AsyncTask<String, Void, String> {
     private ArrayList<Movie> mMovies;
-    private CallbackGenres mCallbackGenres;
+    private CallbackMovieJson mCallbackGenres;
 
-    public GetGenresJson(ArrayList<Movie> movies, CallbackGenres callbackGenres) {
+    public GetGenresJson(ArrayList<Movie> movies, CallbackMovieJson callbackGenres) {
         mMovies = movies;
         mCallbackGenres = callbackGenres;
     }
 
     @Override
     protected String doInBackground(String... strings) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         try {
             URL url = new URL(strings[0]);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
-            String read = "";
+            String read;
             while ((read = bufferedReader.readLine()) != null) {
-                result += read;
+                result.append(read);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return result.toString();
     }
 
     @Override
@@ -66,9 +66,9 @@ public class GetGenresJson extends AsyncTask<String, Void, String> {
                 mMovies.add(
                         new Movie(id, posterPath, name, overView, backDropPath, releaseDate, vote));
             }
-            mCallbackGenres.onGetGenresSuccess(mMovies);
+            mCallbackGenres.onSuccess(mMovies);
         } catch (JSONException e) {
-            mCallbackGenres.onGetGenresFail(e);
+            mCallbackGenres.onFail(e);
         }
         super.onPostExecute(s);
     }

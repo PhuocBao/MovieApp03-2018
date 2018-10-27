@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_genres"
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_genres"
         android:title="@string/genres">
         <menu>
-            <item android:id="@+id/menu_action"
-                android:title="@string/action"
-                android:icon="@drawable/ic_action"/>
-            <item android:id="@+id/menu_adventure"
-                android:title="@string/adventure"
-                android:icon="@drawable/ic_adventure"/>
-            <item android:id="@+id/menu_animation"
-                android:title="@string/animation"
-                android:icon="@drawable/ic_animation"/>
-            <item android:id="@+id/menu_comedy"
-                android:title="@string/comedy"
-                android:icon="@drawable/ic_comedy"/>
-            <item android:id="@+id/menu_crime"
-                android:title="@string/crime"
-                android:icon="@drawable/ic_crime"/>
-            <item android:id="@+id/menu_drama"
-                android:title="@string/drama"
-                android:icon="@drawable/ic_drama"/>
+            <item
+                android:id="@+id/menu_action"
+                android:icon="@drawable/ic_action"
+                android:title="@string/action" />
+            <item
+                android:id="@+id/menu_adventure"
+                android:icon="@drawable/ic_adventure"
+                android:title="@string/adventure" />
+            <item
+                android:id="@+id/menu_animation"
+                android:icon="@drawable/ic_animation"
+                android:title="@string/animation" />
+            <item
+                android:id="@+id/menu_comedy"
+                android:icon="@drawable/ic_comedy"
+                android:title="@string/comedy" />
+            <item
+                android:id="@+id/menu_crime"
+                android:icon="@drawable/ic_crime"
+                android:title="@string/crime" />
+            <item
+                android:id="@+id/menu_drama"
+                android:icon="@drawable/ic_drama"
+                android:title="@string/drama" />
+            <item
+                android:id="@+id/menu_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout" />
         </menu>
     </item>
 </menu>

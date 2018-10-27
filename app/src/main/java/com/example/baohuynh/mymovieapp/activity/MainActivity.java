@@ -13,8 +13,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.ViewPagerAdapter;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import java.lang.annotation.Retention;
 import java.util.Objects;
 
@@ -24,6 +33,7 @@ import static com.example.baohuynh.mymovieapp.activity.MainActivity.Nav_Item.ANI
 import static com.example.baohuynh.mymovieapp.activity.MainActivity.Nav_Item.COMEDY;
 import static com.example.baohuynh.mymovieapp.activity.MainActivity.Nav_Item.CRIME;
 import static com.example.baohuynh.mymovieapp.activity.MainActivity.Nav_Item.DRAMA;
+import static com.example.baohuynh.mymovieapp.activity.PlayTrailer.mAuth;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class MainActivity extends AppCompatActivity
@@ -103,12 +113,34 @@ public class MainActivity extends AppCompatActivity
                 startActivity(iGenres);
                 mDrawerLayout.closeDrawers();
                 break;
+            case R.id.menu_logout:
+                logout();
+                mDrawerLayout.closeDrawers();
+                break;
         }
         return true;
     }
 
+    private void logout() {
+        if (mAuth.getCurrentUser() != null) {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
+                    GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(
+                    getString(R.string.default_web_client_id)).requestEmail().build();
+            GoogleSignInClient signInClient =
+                    GoogleSignIn.getClient(this, gso);
+            signInClient.revokeAccess().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(MainActivity.this, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
+                }
+            });
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+        }
+    }
+
     @Retention(SOURCE)
-    @IntDef({ ACTION, ADVENTURE, ANIMATION, COMEDY, CRIME, DRAMA })
+    @IntDef({ACTION, ADVENTURE, ANIMATION, COMEDY, CRIME, DRAMA})
     public @interface Nav_Item {
         int ACTION = 0;
         int ADVENTURE = 1;

@@ -1,6 +1,7 @@
 package com.example.baohuynh.mymovieapp.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,16 +14,17 @@ import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
 import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.fragment.MovieFragment;
 import com.example.baohuynh.mymovieapp.handler.CallBackOnClickItem;
-import com.example.baohuynh.mymovieapp.handler.CallbackGenres;
+import com.example.baohuynh.mymovieapp.handler.CallbackMovieJson;
 import com.example.baohuynh.mymovieapp.handler.GetGenresJson;
 import com.example.baohuynh.mymovieapp.handler.OnLoadMoreListener;
 import com.example.baohuynh.mymovieapp.model.Movie;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.example.baohuynh.mymovieapp.fragment.MovieFragment.MOVIE_LIST;
 import static com.example.baohuynh.mymovieapp.fragment.MovieFragment.POSITION;
 
-public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadMoreListener,
+public class Genres extends AppCompatActivity implements CallbackMovieJson, OnLoadMoreListener,
         CallBackOnClickItem {
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -50,7 +52,7 @@ public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadM
     }
 
     @Override
-    public void onGetGenresSuccess(ArrayList<Movie> movies) {
+    public void onSuccess(ArrayList<Movie> movies) {
         if (mTemps == null) {
             mTemps = movies;
             mRecyclerView = findViewById(R.id.recycler_genres);
@@ -67,7 +69,7 @@ public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadM
     }
 
     @Override
-    public void onGetGenresFail(Throwable e) {
+    public void onFail(Throwable e) {
         Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
     }
 
@@ -97,7 +99,9 @@ public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadM
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void getGenres(int page) {
@@ -127,6 +131,12 @@ public class Genres extends AppCompatActivity implements CallbackGenres, OnLoadM
             case MainActivity.DRAMA_ID:
                 setTitle(R.string.drama);
                 genresJson.execute(MovieAPI.getMovieGenres(MainActivity.DRAMA_ID, page));
+                break;
+            case PlayTrailer.SIMILAR_MOVIES:
+                int idMovie = getIntent().getIntExtra(MovieDetail.MOVIE_ID, 1);
+                String movieName = getIntent().getStringExtra(MovieDetail.NAME);
+                setTitle(movieName);
+                genresJson.execute(MovieAPI.getSimilarMovie(idMovie, page));
                 break;
         }
     }

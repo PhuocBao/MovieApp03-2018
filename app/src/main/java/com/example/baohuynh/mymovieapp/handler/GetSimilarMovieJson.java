@@ -1,8 +1,10 @@
 package com.example.baohuynh.mymovieapp.handler;
 
 import android.os.AsyncTask;
+
 import com.example.baohuynh.mymovieapp.data.MovieAPI;
 import com.example.baohuynh.mymovieapp.model.Movie;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,11 +24,11 @@ import org.json.JSONObject;
 
 public class GetSimilarMovieJson extends AsyncTask<String, Void, String> {
     private ArrayList<Movie> mMovies;
-    private CallbackGetSimilarMovie mSimilarMovie;
+    private CallbackMovieJson mCallbackSimilar;
 
-    public GetSimilarMovieJson(ArrayList<Movie> movies, CallbackGetSimilarMovie similarMovie) {
+    public GetSimilarMovieJson(ArrayList<Movie> movies, CallbackMovieJson similarMovie) {
         mMovies = movies;
-        mSimilarMovie = similarMovie;
+        mCallbackSimilar = similarMovie;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class GetSimilarMovieJson extends AsyncTask<String, Void, String> {
             httpURLConnection.setRequestMethod("GET");
             InputStream inputStream = url.openStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String read = "";
+            String read;
             while ((read = bufferedReader.readLine()) != null) {
                 result.append(read);
             }
@@ -70,9 +73,9 @@ public class GetSimilarMovieJson extends AsyncTask<String, Void, String> {
                 mMovies.add(
                         new Movie(id, posterPath, name, overView, backDropPath, releaseDate, vote));
             }
-            mSimilarMovie.onGetSimilarMovieSuccess(mMovies);
+            mCallbackSimilar.onSuccess(mMovies);
         } catch (JSONException e) {
-            mSimilarMovie.onGetSimilarMovieFail(e);
+            mCallbackSimilar.onFail(e);
         }
         super.onPostExecute(s);
     }

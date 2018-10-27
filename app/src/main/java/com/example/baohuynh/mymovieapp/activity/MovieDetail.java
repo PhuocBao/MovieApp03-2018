@@ -2,13 +2,13 @@ package com.example.baohuynh.mymovieapp.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.adapter.ActorAdapter;
 import com.example.baohuynh.mymovieapp.data.DatabaseHelper;
@@ -27,7 +28,9 @@ import com.example.baohuynh.mymovieapp.handler.GetMovieActorJson;
 import com.example.baohuynh.mymovieapp.model.Actor;
 import com.example.baohuynh.mymovieapp.model.Movie;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MovieDetail extends AppCompatActivity implements CallbackActor, View.OnClickListener,
         CallBackOnClickItem {
@@ -125,6 +128,7 @@ public class MovieDetail extends AppCompatActivity implements CallbackActor, Vie
     public void onClick(View view) {
         Intent iPlayerTrailer = new Intent(this, PlayTrailer.class);
         iPlayerTrailer.putExtra(MOVIE_ID, mMovies.get(mPosition).getMovieID());
+        iPlayerTrailer.putExtra(NAME, mMovies.get(mPosition).getTxtMovieName());
         startActivity(iPlayerTrailer);
     }
 
@@ -147,7 +151,9 @@ public class MovieDetail extends AppCompatActivity implements CallbackActor, Vie
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        }
         setTitle(R.string.detail);
     }
 

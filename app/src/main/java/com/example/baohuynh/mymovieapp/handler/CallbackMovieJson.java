@@ -8,6 +8,6 @@ import java.util.ArrayList;
  */
 
 public interface CallbackMovieJson {
-    void CallbackSuccess(ArrayList<Movie> movies);
-    void CallbackFail(Throwable e);
+    void onSuccess(ArrayList<Movie> movies);
+    void onFail(Throwable e);
 }

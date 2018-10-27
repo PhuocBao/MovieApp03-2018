@@ -2,6 +2,7 @@ package com.example.baohuynh.mymovieapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.example.baohuynh.mymovieapp.R;
 import com.example.baohuynh.mymovieapp.activity.MovieDetail;
 import com.example.baohuynh.mymovieapp.adapter.MovieAdapter;
@@ -25,6 +27,7 @@ import com.example.baohuynh.mymovieapp.handler.CallbackMovieJson;
 import com.example.baohuynh.mymovieapp.handler.GetMovieJson;
 import com.example.baohuynh.mymovieapp.handler.OnLoadMoreListener;
 import com.example.baohuynh.mymovieapp.model.Movie;
+
 import java.util.ArrayList;
 
 /**
@@ -47,8 +50,8 @@ public class MovieFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_main);
         updatePage(mPage);
@@ -58,7 +61,7 @@ public class MovieFragment extends Fragment
     }
 
     @Override
-    public void CallbackSuccess(ArrayList<Movie> movies) {
+    public void onSuccess(ArrayList<Movie> movies) {
         if (mTempArr == null) {
             mTempArr = movies;
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
@@ -76,7 +79,7 @@ public class MovieFragment extends Fragment
     }
 
     @Override
-    public void CallbackFail(Throwable e) {
+    public void onFail(Throwable e) {
         Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
     }
 

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MyMovieApp</string>
 
+    <string name="facebook_app_id">922088754651956</string>
+    <string name="fb_login_protocol_scheme">fb922088754651956</string>
     <string name="popular">Popular</string>
     <string name="now_playing">Now Playing</string>
     <string name="upcoming">Upcoming</string>
@@ -8,6 +10,8 @@
     <string name="content_discription">content discription</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="logout">Log out</string>
+    <string name="logout_success">Log out success</string>
     <string name="detail">Detail</string>
     <string name="watch_trailer">Watch Trailer</string>
     <string name="overview">Overview</string>
@@ -23,6 +27,14 @@
     <string name="intro">Developed by Phuoc Bao</string>
     <string name="search">Search</string>
     <string name="favorite">Favorite</string>
+    <string name="comment">Comment</string>
+    <string name="similar_movie">Similar Movies</string>
+    <string name="view_more">View more</string>
+    <string name="write_comment">Write a comment</string>
+    <string name="require_login">You have to login to use this function</string>
     <string name="my_email">phuocbaohuynh@gmail.com</string>
+    <string name="fb_login">Login with Facebook</string>
+    <string name="gg_login">Sign in with Google</string>
+    <string name="empty_comment">Be the first to comment</string>
     <string name="error">Get data error. Please check your connection</string>
 </resources>
