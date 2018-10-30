@@ -131,7 +131,8 @@ public class PlayTrailer extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(String.valueOf(idMovie))) {
-                    mDatabase.child(COMMENT_CHILD).child(String.valueOf(idMovie)).addValueEventListener(new ValueEventListener() {
+                    mDatabase.child(COMMENT_CHILD).child(String.valueOf(idMovie))
+                            .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             //clear comment list before run for loop
@@ -149,13 +150,17 @@ public class PlayTrailer extends AppCompatActivity
                                         mTempComments.add(mComments.get(i));
                                         if (i == 2) break;
                                     }
-                                    mRecyclerComment.setAdapter(new CommentAdapter(getApplicationContext(), mTempComments));
-                                    mRecyclerComment.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                    mRecyclerComment.setAdapter(new CommentAdapter
+                                            (getApplicationContext(), mTempComments));
+                                    mRecyclerComment.setLayoutManager(new LinearLayoutManager
+                                            (getApplicationContext()));
                                 } else {
                                     mTvEmptyComment.setVisibility(View.GONE);
                                     mTvMoreComment.setVisibility(View.INVISIBLE);
-                                    mRecyclerComment.setAdapter(new CommentAdapter(getApplicationContext(), mComments));
-                                    mRecyclerComment.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                    mRecyclerComment.setAdapter(new CommentAdapter
+                                            (getApplicationContext(), mComments));
+                                    mRecyclerComment.setLayoutManager(new LinearLayoutManager
+                                            (getApplicationContext()));
                                 }
                             }
                         }
@@ -165,8 +170,6 @@ public class PlayTrailer extends AppCompatActivity
 
                         }
                     });
-                } else {
-                    mDatabase.child(COMMENT_CHILD).setValue(idMovie);
                 }
             }
 
@@ -200,7 +203,8 @@ public class PlayTrailer extends AppCompatActivity
 
     @Override
     public void getTrailerSuccess(final ArrayList<Trailer> trailers) {
-        YouTubePlayerFragment playerFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.fragment_youtubeview);
+        YouTubePlayerFragment playerFragment = (YouTubePlayerFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_youtubeview);
         YouTubePlayer.OnInitializedListener onInitializedListener =
                 new YouTubePlayer.OnInitializedListener() {
 
@@ -216,7 +220,8 @@ public class PlayTrailer extends AppCompatActivity
 
                     @Override
                     public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                        YouTubeInitializationResult youTubeInitializationResult) {
+                                                        YouTubeInitializationResult
+                                                                youTubeInitializationResult) {
                         Toast.makeText(PlayTrailer.this,
                                 "You need to run version 4.2.16 of the mobile YouTube app (or "
                                         + "higher) to use the API.", Toast.LENGTH_LONG).show();
@@ -434,7 +439,8 @@ public class PlayTrailer extends AppCompatActivity
 
     private void updateUI() {
         if (mAuth.getCurrentUser() != null) {
-            Picasso.with(this).load(mAuth.getCurrentUser().getPhotoUrl()).placeholder(R.drawable.ic_empty_user).into(mUserImage);
+            Picasso.with(this).load(mAuth.getCurrentUser().getPhotoUrl()).placeholder(R.drawable
+                    .ic_empty_user).into(mUserImage);
         }
     }
 

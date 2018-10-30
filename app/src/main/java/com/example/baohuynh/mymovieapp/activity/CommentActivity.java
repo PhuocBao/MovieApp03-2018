@@ -54,7 +54,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(String.valueOf(idMovie))) {
-                    mDatabase.child(COMMENT_CHILD).child(String.valueOf(idMovie)).addValueEventListener(new ValueEventListener() {
+                    mDatabase.child(COMMENT_CHILD).child(String.valueOf(idMovie))
+                            .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             //clear comment list before run for loop
@@ -63,7 +64,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                                 Comment comment = data.getValue(Comment.class);
                                 mComments.add(comment);
                                 mRecyclerComment.setAdapter(mCommentAdapter);
-                                mRecyclerComment.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                mRecyclerComment.setLayoutManager(new LinearLayoutManager
+                                        (getApplicationContext()));
                                 mRecyclerComment.setHasFixedSize(true);
                             }
                         }
@@ -88,7 +90,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btn_input_comment:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    Comment comment = new Comment(Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName(),
+                    Comment comment = new Comment(Objects.requireNonNull(mAuth.getCurrentUser())
+                            .getDisplayName(),
                             mEdtInputComment.getText().toString(),
                             Objects.requireNonNull(mAuth.getCurrentUser().getPhotoUrl()).toString());
                     mDatabase.child(COMMENT_CHILD)
@@ -98,10 +101,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                     mComments.add(comment);
                     mCommentAdapter.notifyDataSetChanged();
                     mEdtInputComment.setText("");
-                    mEdtInputComment.setFocusable(false);
                     break;
                 }
-
         }
     }
 
@@ -123,7 +124,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mEdtInputComment = findViewById(R.id.edt_input_comment);
         CircleImageView img = findViewById(R.id.img_input_comment);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Picasso.with(this).load(Objects.requireNonNull(mAuth.getCurrentUser()).getPhotoUrl()).into(img);
+            Picasso.with(this).load(Objects.requireNonNull(mAuth.getCurrentUser()).getPhotoUrl())
+                    .into(img);
         }
         Button btnSend = findViewById(R.id.btn_input_comment);
         btnSend.setOnClickListener(this);

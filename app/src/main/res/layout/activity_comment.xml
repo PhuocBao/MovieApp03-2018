@@ -19,7 +19,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_input_comment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10" />
     </LinearLayout>
 
     <RelativeLayout
